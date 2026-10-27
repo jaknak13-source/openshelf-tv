@@ -49,6 +49,6 @@ To see what a sender actually delivers, turn on the statistics overlay: `airplay
 
 ## Limits
 
-- Copy-protected video (Apple TV+, Netflix on the phone) shows black. That is Apple's DRM.
-- iPhone screen mirroring is usually capped near 1080p by iOS; Macs and video casting can go higher.
+- Copy-protected video (Apple TV+, Netflix on the phone) shows a black screen because of Apple's DRM.
+- iOS usually limits iPhone screen mirroring to about as many pixels as 1080p; Macs and video casting can go higher.
 - The audio-only AirPlay 1 protocol used by some older tools (RTSP ANNOUNCE) is not supported by this receiver.

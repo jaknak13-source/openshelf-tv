@@ -11,7 +11,7 @@ With the remote:
 | 1 | Home > Settings (gear icon, top right) | Home > Einstellungen |
 | 2 | Device Preferences > About | Geräteeinstellungen > Info |
 | 3 | Select **Build** and press OK seven times | **Build** siebenmal mit OK drücken |
-| 4 | "You are now a developer!" | „Sie sind jetzt Entwickler!" |
+| 4 | "You are now a developer!" | "Sie sind jetzt Entwickler!" |
 
 On some TVs the first screen is a small quick-settings bar; scroll to its end and open Settings from there. Some brands put About under System instead of Device Preferences.
 
@@ -22,7 +22,7 @@ Back once, then open **Developer options** (Entwickleroptionen) at the bottom of
 - **USB debugging** / **ADB debugging** (ADB-Debugging)
 - **Network debugging**, if your TV lists it separately
 
-Android 11 and newer TVs may show **Wireless debugging** with a pairing code instead. Then pair first: `adb pair <ip>:<pairing-port>` with the code shown on the TV, and connect to the port shown under Wireless debugging.
+Android 11 and newer TVs may show **Wireless debugging** with a pairing code instead. Then pair first: `adb pair <ip>:<pairing-port>` with the code shown on the TV, and pass the port shown under Wireless debugging to the tool, for example `python3 tools/openshelf.py connect --port 37123`. OpenShelf Keeper only works with ADB on port 5555.
 
 ## 3. Find the TV's IP address
 

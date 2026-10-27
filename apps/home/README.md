@@ -1,6 +1,6 @@
 # OpenShelf (home screen)
 
-A replacement home screen for Android TV 9 and newer (package `tv.openshelf.home`). It shows four rows: Favorites, Apps, Inputs and System (Settings, the AirPlay receiver and OpenShelf Keeper if installed, and "Edit home screen"). No recommendation rows, no ads, no network access.
+A replacement home screen for Android TV 9 and newer (package `tv.openshelf.home`). It shows four rows: Favorites, Apps, Inputs and System (Settings, the AirPlay receiver and OpenShelf Keeper if installed, and "Edit home screen"). It has no recommendation rows or ads and no network permission.
 
 Hold OK on a tile (or press the menu button) to add it to the favorites, move it, or hide it. "Edit home screen" in the System row picks a background and brings hidden tiles back.
 
@@ -29,7 +29,7 @@ The first build creates a signing key in `signing/` (git-ignored). Keep it: Andr
 adb install build/openshelf-home.apk
 ```
 
-Android shows a chooser the next time Home is pressed while two home apps are installed; pick OpenShelf. To remove the stock home screen for good, disable it with the keeper's list 4 (see `../keeper/` and `../../docs/`).
+Android shows a chooser the next time Home is pressed while two home apps are installed; pick OpenShelf. To stop the stock home screen from coming back, disable it with `lists/sony-bravia-2019/04-stock-home.txt` (see `../../docs/install.md`, step 4).
 
 ## Custom background
 

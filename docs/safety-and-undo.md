@@ -3,9 +3,9 @@
 ## What the tool will and won't do
 
 - It only **disables** packages (`pm disable-user --user 0`). Nothing is uninstalled from the system partition, so a factory reset always brings the TV back to stock.
-- Some packages can never be disabled, even if a list contains them: the TV engine and inputs, Settings, Play Store, Google Play services, the system UI, voice search, Chromecast, soundbar control, the HbbTV red button, system updates, OpenShelf itself and the AirPlay receiver.
-- The stock home screen is only disabled when a replacement home app is installed and enabled. If a home app ever fails, Android falls back to a built-in screen; the TV can't get stuck without a home.
-- Every change is written to `backups/undo.txt`. `apply` asks before changing anything unless you pass `--yes`.
+- Some packages can never be disabled, even if a list contains them: the TV engine and inputs, Settings, Play Store, Google Play services, the system UI, voice search, Chromecast, soundbar control, the HbbTV red button, system updates, OpenShelf itself, Projectivy Launcher and the AirPlay receiver.
+- The stock home screen is only disabled when a replacement home app is installed and enabled. On Android TV, if a home app fails, Android falls back to a built-in screen. Google TV models behave differently; see [troubleshooting.md](troubleshooting.md).
+- Every package the tool disables is written to `backups/undo.txt`. `apply` asks before changing anything unless you pass `--yes`.
 
 ## Undo
 

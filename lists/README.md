@@ -16,9 +16,9 @@ com.example.package            # optional comment after the name
 
 ## Writing a list for another TV
 
-1. `python3 tools/openshelf.py backup` and `audit`. The backup has the full package list in `packages_system.txt`.
-2. Look for the usual groups: ACR / viewing trackers (Samba TV, Alphonso and vendor "viewing information" services), vendor app stores and promo apps, shop demo mode, remote-support or device agents, feedback and bug-report senders, hotel or commercial-display services, preloaded apps.
-3. Leave alone: anything for tuner, inputs, HDMI-CEC, audio output, picture settings, system update, setup wizard, Google Play services, the keyboard you use, voice search and casting. The tool's denylist protects the most important ones, but it only knows common package names.
+1. `python3 tools/openshelf.py backup` and `audit`. The backup lists all preinstalled system packages in `packages_system.txt`.
+2. Look for the usual groups: automatic content recognition (ACR) trackers (Samba TV, Alphonso and vendor "viewing information" services), vendor app stores and promo apps, shop demo mode, remote-support or device agents, feedback and bug-report senders, hotel or commercial-display services, preloaded apps.
+3. Leave alone: anything for tuner, inputs, HDMI-CEC, audio output, picture settings, system update, setup wizard, Google Play services, the keyboard you use, voice search and casting. The tool's protected packages cover the most important ones, but it only knows common package names.
 4. Comment every line. Apply with `--dry-run`, then one file at a time with `check` in between.
 5. If you share your list, include the exact model and firmware (`connect` prints both).
 

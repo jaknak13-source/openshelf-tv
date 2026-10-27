@@ -4,11 +4,11 @@ OpenShelf Keeper (package `tv.openshelf.keeper`) is a safety net for a TV whose 
 
 It does this the same way you would from a computer: it connects to the TV's own ADB daemon on `127.0.0.1:5555` with its own RSA key and runs `pm disable-user --user 0 <package>` for each listed package that is installed and still enabled. The only other commands it sends are `pm list packages`, `pm list packages -d` and `pm list packages -e`. It never uninstalls or enables anything.
 
-ADB debugging has to stay switched on in the TV's developer options. The first run makes the TV ask "Allow USB debugging?" for the keeper's key; tick "Always allow" and confirm. Until then the keeper reports that approval is missing and does not retry, so you won't get a stream of prompts. The key lives in the app's private storage and is excluded from backups.
+ADB debugging has to stay switched on in the TV's developer options. The keeper always connects to port 5555, which is the port classic network debugging uses. The first run makes the TV ask "Allow USB debugging?" for the keeper's key; tick "Always allow" and confirm. Until then the keeper reports that approval is missing and does not retry, so you won't get a stream of prompts. The key lives in the app's private storage and is excluded from backups.
 
 ## What it will not touch
 
-- A fixed deny list in `src/tv/openshelf/keeper/core/Plan.java`: every package starting with `com.sony.dtv.tvinput`, the keeper itself, and `com.sony.dtv.tvx`, `com.android.tv.settings`, `com.android.vending`, `com.google.android.gms`, `com.android.systemui`, `com.google.android.katniss`, `com.google.android.apps.mediashell`, `com.sony.dtv.braviasyncservice`, `com.sony.dtv.audiooutput`, `com.sony.dtv.hbbtvlauncher`, `com.sony.dtv.systemupdate`, `com.spocky.projengmenu`, `tv.openshelf.home`, `io.github.jqssun.airplay`.
+- A fixed list of protected packages in `src/tv/openshelf/keeper/core/Plan.java`: every package starting with `com.sony.dtv.tvinput`, the keeper itself, and `com.sony.dtv.tvx`, `com.android.tv.settings`, `com.android.vending`, `com.google.android.gms`, `com.android.systemui`, `com.google.android.katniss`, `com.google.android.apps.mediashell`, `com.sony.dtv.braviasyncservice`, `com.sony.dtv.audiooutput`, `com.sony.dtv.hbbtvlauncher`, `com.sony.dtv.systemupdate`, `com.spocky.projengmenu`, `tv.openshelf.home`, `io.github.jqssun.airplay`.
 - The stock home screen (`com.google.android.tvlauncher`), unless OpenShelf (`tv.openshelf.home`) or Projectivy (`com.spocky.projengmenu`) is installed and enabled. Without a replacement, Home would end up on a Sony settings screen.
 - Package names outside `[a-zA-Z0-9_.]`. These are rejected at build time and checked again on the TV.
 
