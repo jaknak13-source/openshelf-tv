@@ -2,7 +2,7 @@
 
 An ad-free home screen, a bloatware cleanup tool and AirPlay mirroring for Android TV sets. Built and tested on a 2019 Sony BRAVIA.
 
-OpenShelf runs on top of the TV's own Android TV system and leaves it in place. It installs a home screen app, switches off preinstalled apps you don't need and sets up an open-source AirPlay receiver. Every change can be undone.
+OpenShelf works over ADB on top of the TV's own Android TV system and does not replace it. Every change can be undone.
 
 | Before: Sony's stock home screen | After: OpenShelf |
 |---|---|
@@ -22,6 +22,8 @@ On the test TV the home screen uses about 23 MB of memory, compared with 176 MB 
 
 Plain text lists of system packages to switch off, for example Samba TV's viewing tracker, promo tiles, shop demo mode and hotel display services. Each line has a comment that says what the package does. The tool disables packages with `pm disable-user` and never uninstalls them.
 
+On the test TV (Sony KD-55XG8096, 2 GB RAM), free memory 60 seconds after a restart went from 537 MB to 778 MB.
+
 ### OpenShelf Keeper (optional)
 
 A small app that checks after every boot that the listed apps are still disabled. If a firmware update turned one back on, it switches it off again.
@@ -32,23 +34,21 @@ Screen mirroring from iPhone, iPad and Mac through the built-in Screen Mirroring
 
 ### Command-line tool
 
-`tools/openshelf.py` covers backup, audit, apply, undo, health checks and settings. It needs only Python 3.9 or newer and adb, and runs on macOS, Linux and Windows.
+`tools/openshelf.py` covers backup, audit, apply, restore, health checks and settings. It needs only Python 3.9 or newer and adb, and runs on macOS, Linux and Windows.
 
-On the test TV (Sony KD-55XG8096, 2 GB RAM), free memory 60 seconds after a restart went from 537 MB to 778 MB.
-
-## Which TVs
+## Supported TVs
 
 | Device | Status |
 |---|---|
 | Sony BRAVIA 2019 Android TV 9 (XG80, XG85, XG95 and similar) | Tested. Ready-made cleanup lists in `lists/sony-bravia-2019/`. |
-| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes (Nvidia Shield, Chromecast with Google TV) | Not tested yet. Nothing in the home screen, keeper, AirPlay setup or tool is specific to Sony, so they are expected to work. You need a cleanup list for your model: `openshelf.py audit` shows what is installed, and [lists/README.md](lists/README.md) explains how to write one. |
+| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes (Nvidia Shield, Chromecast with Google TV) | Not tested yet. The home screen, keeper, AirPlay setup and tool should run on any Android TV, but the tool's protected packages are mostly Sony and Google names, so check your TV's live TV and input packages yourself before applying a list. You need a cleanup list for your model: `openshelf.py backup` saves the installed system packages (`packages_system.txt`), and [lists/README.md](lists/README.md) explains how to write a list from it. |
 | Google TV models (2021+) | Possible, but replacing the home screen is harder; Google TV can take Home back. Read [docs/troubleshooting.md](docs/troubleshooting.md) first. |
 | Amazon Fire TV with Fire OS | Android-based, untested. The tool and AirPlay should work; home screen replacement is restricted by Amazon. |
 | Samsung (Tizen), LG (webOS), Roku | Not possible. These are not Android TV. |
 
 ## Quick start
 
-You need a computer on the same network as the TV, [Android platform-tools](https://developer.android.com/tools/releases/platform-tools) (`adb`) and Python 3.9 or newer.
+You need a computer on the same network as the TV, [Android platform-tools](https://developer.android.com/tools/releases/platform-tools) (which includes `adb`, the Android Debug Bridge) and Python 3.9 or newer.
 
 1. Turn on network debugging on the TV: [docs/setup-tv.md](docs/setup-tv.md).
 2. Connect and take a backup:
@@ -63,10 +63,10 @@ You need a computer on the same network as the TV, [Android platform-tools](http
    python3 tools/openshelf.py apply lists/sony-bravia-2019/01-tracking-ads-demo.txt --dry-run
    python3 tools/openshelf.py apply lists/sony-bravia-2019/01-tracking-ads-demo.txt
    ```
-4. Build and install the home screen, then switch off the stock one: [docs/install.md](docs/install.md).
+4. Install the home screen, using the prebuilt APK in [dist/](dist/) or your own build, then switch off the stock one: [docs/install.md](docs/install.md).
 5. Check that everything still works: `python3 tools/openshelf.py check`.
 
-On Windows use `py` instead of `python3` and `set TV_HOST=...` instead of `export`.
+On Windows use `py` instead of `python3`, and `set TV_HOST=...` (Command Prompt) or `$env:TV_HOST="..."` (PowerShell) instead of `export`.
 
 ## Using a coding agent
 
@@ -91,7 +91,7 @@ If the keeper is installed, uninstall it first. Otherwise it switches the apps o
 - ADB debugging has to stay on if you use the keeper. Only computers you approved on the TV can connect.
 - After switching apps off, wait at least 30 seconds before restarting the TV. Android saves the change with a short delay; a restart straight away can lose it.
 - Most Android TVs draw their menus at 1920x1080, even on 4K panels. Video apps still play in 4K, and AirPlay can be set to advertise 4K (see [docs/airplay.md](docs/airplay.md)).
-- Copy-protected apps (Apple TV+, Netflix on the phone) cannot be mirrored over AirPlay. That is an Apple limit.
+- Copy-protected apps (Apple TV+, Netflix on the phone) show a black screen over AirPlay because of Apple's copy protection.
 - Ad-blocking DNS (`openshelf.py tweak dns adguard`) blocks ad servers for the whole TV but can break ad-funded streaming apps. It is off unless you turn it on.
 
 ## Questions
@@ -126,6 +126,7 @@ Yes. The tool accepts Projectivy Launcher as the replacement home screen and nev
 apps/home/           OpenShelf home screen (Java, builds without Gradle)
 apps/keeper/         OpenShelf Keeper boot-time safety net
 apps/airplay-patch/  patch script for the open-source AirPlay receiver
+dist/                prebuilt APKs with checksums
 lists/               cleanup lists per TV model
 tools/openshelf.py   command-line tool
 tests/               tests for the tool

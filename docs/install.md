@@ -19,7 +19,7 @@ export ANDROID_SDK_ROOT="$HOME/android-sdk"
 export JAVA_HOME=<path to JDK 17>      # macOS: $(/usr/libexec/java_home -v 17)
 ```
 
-The build scripts are bash. On Windows run them in Git Bash or WSL; the Python tool runs natively.
+The build scripts are bash. On Windows run them in WSL (Git Bash may work but is untested); the Python tool runs natively.
 
 ## 1. Backup and audit
 
@@ -46,12 +46,20 @@ Repeat for `02-...` and `03-...`. Read `03-unused-extras.txt` before applying it
 
 ## 3. Home screen
 
+Install the prebuilt APK:
+
+```bash
+python3 tools/openshelf.py install dist/openshelf-home-1.0.0.apk
+```
+
+Or build it yourself (see [apps/home/README.md](../apps/home/README.md) for the tools you need):
+
 ```bash
 apps/home/build.sh
 python3 tools/openshelf.py install apps/home/build/openshelf-home.apk
 ```
 
-Open it once from the app list. Press OK and hold on any tile to move it, add it to Favorites or hide it.
+Open it once from the app list. Hold OK on any tile to move it, add it to Favorites or hide it.
 
 ## 4. Make it the home screen
 
@@ -59,7 +67,7 @@ Open it once from the app list. Press OK and hold on any tile to move it, add it
 python3 tools/openshelf.py apply lists/sony-bravia-2019/04-stock-home.txt
 ```
 
-The tool only switches off the stock home screen when OpenShelf is installed and enabled. Press Home on the remote: OpenShelf opens. If Android asks which app to use, pick OpenShelf and "Always". Then wait 30 seconds, restart the TV and run `check --reboot` to confirm it survives a restart.
+The tool only switches off the stock home screen when OpenShelf is installed and enabled. Press Home on the remote: OpenShelf opens. If Android asks which app to use, pick OpenShelf and "Always". Then wait 30 seconds and run `python3 tools/openshelf.py check --reboot`. It restarts the TV and checks that OpenShelf is still the home screen.
 
 ## 5. AirPlay
 
@@ -67,14 +75,22 @@ See [airplay.md](airplay.md).
 
 ## 6. OpenShelf Keeper (optional)
 
-Only needed if you want the cleanup re-applied automatically, for example after a firmware update. Build it with the same lists you applied:
+Only needed if you want the cleanup re-applied automatically, for example after a firmware update.
+
+If you have a 2019 Sony BRAVIA and applied all four core lists unchanged, install the prebuilt APK:
+
+```bash
+python3 tools/openshelf.py install dist/openshelf-keeper-1.0.0-sony-bravia-2019.apk
+```
+
+Otherwise build it with the same lists you applied:
 
 ```bash
 KEEPER_LISTS="lists/sony-bravia-2019/01-tracking-ads-demo.txt lists/sony-bravia-2019/02-hotel-business.txt lists/sony-bravia-2019/03-unused-extras.txt lists/sony-bravia-2019/04-stock-home.txt" apps/keeper/build.sh
 python3 tools/openshelf.py install apps/keeper/build/openshelf-keeper.apk
 ```
 
-Open OpenShelf Keeper on the TV and press the apply button. The TV asks "Allow USB debugging?" for the keeper's own key: tick "Always allow" and confirm. From then on it runs by itself after every boot. ADB debugging must stay on.
+Open OpenShelf Keeper on the TV and press **Apply now**. The TV asks "Allow USB debugging?" for the keeper's own key: tick "Always allow" and confirm. From then on it runs by itself after every boot. ADB debugging must stay on.
 
 ## 7. YouTube without ads (optional)
 

@@ -1,0 +1,2 @@
+2d0efb38d354d6144bb847a901456e879aea4d705552ca903f612794843813de  openshelf-home-1.0.0.apk
+5f4554f7bfc8a0a7bb8cca19ad52263b22df06a8f34770fa5726c5712730f36d  openshelf-keeper-1.0.0-sony-bravia-2019.apk

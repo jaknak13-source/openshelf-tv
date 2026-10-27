@@ -2,6 +2,8 @@
 build/
 signing/
 *.apk
+# prebuilt release APKs in dist/ are committed on purpose
+!dist/*.apk
 *.aab
 *.keystore
 *.jks

@@ -4,14 +4,14 @@ This file is written for a coding agent (Claude Code, Codex, Cursor and similar)
 
 ## Rules
 
-1. **Ask before changing the TV.** Read-only commands (`connect`, `backup`, `audit`, `apply --dry-run`, `check` without `--reboot`, `airplay list`) are fine. Before every `apply`, `restore`, `install`, `uninstall`, `tweak`, `airplay set` or restart, show the user what will change and wait for a yes.
+1. **Ask before changing the TV.** Read-only commands (`connect`, `backup`, `audit`, `apply --dry-run`, `check` without `--reboot`, `airplay list`) are fine. Before every `apply`, `restore`, `install`, `adb uninstall`, `tweak`, `airplay set` or restart, show the user what will change and wait for a yes.
 2. **Backup first.** Run `backup` before the first change and keep the folder.
 3. **One list at a time**, dry-run first, `check` after each.
 4. **Wait 30 seconds after `apply` before any restart.** An immediate restart can lose the change.
-5. **Never disable** anything outside the provided lists without the user's agreement, and never edit the tool's built-in denylist.
+5. **Never disable** anything outside the provided lists without the user's agreement, and never edit the tool's built-in list of protected packages.
 6. **Prompts on the TV are the user's.** When the TV shows "Allow USB debugging?", tell the user to accept it with the remote. Don't approve it by sending remote keys unless the user explicitly tells you to.
-7. **Don't download APKs from mirrors.** Only from the GitHub releases or F-Droid pages linked in the docs. Compare SHA-256 or signing certificates when two sources exist.
-8. **Report results, not intentions.** After each step, show the command and its output. If a check fails, stop and say so.
+7. **Download APKs only from the sources linked in the docs**: the GitHub releases or F-Droid pages, never mirror sites. Compare SHA-256 or signing certificates when two sources exist.
+8. **Show the output.** After each step, show the command and what it printed. If a check fails, stop and say so.
 
 ## Steps
 
@@ -38,17 +38,17 @@ Summarize for the user: model, Android version, free memory, which list packages
 
 ### 4. Pick the lists
 - Sony BRAVIA 2019 on Android TV 9: `lists/sony-bravia-2019/`.
-- Other models: write a new list folder from the `audit` output following [../lists/README.md](../lists/README.md). Show it to the user line by line before applying.
-- Remove lines for anything the user said they use (for example live TV over a tuner needs the tuner and HbbTV packages; those are on the denylist anyway).
+- Other models: write a new list folder from `packages_system.txt` in the backup, following [../lists/README.md](../lists/README.md). Show it to the user line by line before applying.
+- Remove lines for anything the user said they use (for example live TV over a tuner needs the tuner and HbbTV packages; those are protected anyway).
 
 ### 5. Apply
 For each list: `apply <list> --dry-run`, show the plan, get a yes, `apply <list>`, then `check`. Stop on any FAIL and `restore <list>`.
 
 ### 6. Home screen
-Build `apps/home/build.sh`, install, ask the user to open it once and look at it. Only then apply the stock-home list. Confirm with the HOME resolve command in [troubleshooting.md](troubleshooting.md).
+Install `dist/openshelf-home-1.0.0.apk` (or build it with `apps/home/build.sh`), ask the user to open it once and look at it. Only then apply the stock-home list. Confirm with the HOME resolve command in [troubleshooting.md](troubleshooting.md).
 
 ### 7. Optional parts
-Offer, don't assume: AirPlay ([airplay.md](airplay.md)), SmartTube, faster animations, ad-blocking DNS, OpenShelf Keeper. Explain the trade-off of each (keeper needs ADB to stay on; DNS can break ad-funded apps; the patched AirPlay app doesn't auto-update).
+Ask whether the user wants each of these: AirPlay ([airplay.md](airplay.md)), SmartTube, faster animations, ad-blocking DNS, OpenShelf Keeper. Explain the trade-off of each (keeper needs ADB to stay on; DNS can break ad-funded apps; the patched AirPlay app doesn't auto-update).
 
 ### 8. Restart test
 Wait 30 seconds after the last change, then `python3 tools/openshelf.py check --reboot`. It must pass: home screen, apps start, required packages enabled.
