@@ -12,7 +12,7 @@ You need JDK 17, the Android SDK build-tools 34.0.0 (see `../env.sh`), `python3`
 export JAVA_HOME=/path/to/jdk-17
 export ANDROID_SDK_ROOT=/path/to/android-sdk
 APKTOOL_JAR=/path/to/apktool.jar ./build.sh /path/to/app-release.apk
-# -> build/airplay-patched.apk
+# writes build/airplay-patched.apk
 ```
 
 `apksigner` prints warnings about `META-INF/` entries that are not covered by the v1 signature; those come from the upstream APK and are harmless for v2/v3-signed installs.

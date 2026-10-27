@@ -51,7 +51,7 @@ apps/home/build.sh
 python3 tools/openshelf.py install apps/home/build/openshelf-home.apk
 ```
 
-Open it once from the app list. Press OK and hold on any tile to move it, add it to Favourites or hide it.
+Open it once from the app list. Press OK and hold on any tile to move it, add it to Favorites or hide it.
 
 ## 4. Make it the home screen
 

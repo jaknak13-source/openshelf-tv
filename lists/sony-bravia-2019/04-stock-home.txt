@@ -1,4 +1,4 @@
-# Sony BRAVIA 2019 (Android TV 9) - list 4: stock home screen and its recommendation rows
+# Sony BRAVIA 2019 (Android TV 9), list 4: stock home screen and its recommendation rows
 # Apply this ONLY after OpenShelf (or another launcher) is installed and works.
 # The tool refuses to disable com.google.android.tvlauncher unless a replacement home app is enabled.
 

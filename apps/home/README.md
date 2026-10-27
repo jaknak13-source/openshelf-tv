@@ -1,6 +1,6 @@
 # OpenShelf (home screen)
 
-A replacement home screen for Android TV 9 and newer (package `tv.openshelf.home`). It shows four rows: Favorites, Apps, HDMI Inputs and System (Settings, the AirPlay receiver and OpenShelf Keeper if installed, and "Edit home screen"). No recommendation rows, no ads, no network access.
+A replacement home screen for Android TV 9 and newer (package `tv.openshelf.home`). It shows four rows: Favorites, Apps, Inputs and System (Settings, the AirPlay receiver and OpenShelf Keeper if installed, and "Edit home screen"). No recommendation rows, no ads, no network access.
 
 Hold OK on a tile (or press the menu button) to add it to the favorites, move it, or hide it. "Edit home screen" in the System row picks a background and brings hidden tiles back.
 
@@ -15,7 +15,7 @@ You need JDK 17 and the Android SDK with `platforms;android-28` and `build-tools
 ```sh
 export JAVA_HOME=/path/to/jdk-17
 export ANDROID_SDK_ROOT=/path/to/android-sdk
-./build.sh     # -> build/openshelf-home.apk
+./build.sh     # writes build/openshelf-home.apk
 ./test.sh      # plain-JVM tests for the row rules
 ```
 

@@ -34,7 +34,7 @@ If unauthorized, ask the user to accept the prompt on the TV, then run `connect`
 python3 tools/openshelf.py backup
 python3 tools/openshelf.py audit
 ```
-Summarise for the user: model, Android version, free memory, which list packages are installed, the biggest memory users.
+Summarize for the user: model, Android version, free memory, which list packages are installed, the biggest memory users.
 
 ### 4. Pick the lists
 - Sony BRAVIA 2019 on Android TV 9: `lists/sony-bravia-2019/`.

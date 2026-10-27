@@ -41,4 +41,4 @@ If `connect` says "connection refused", debugging isn't on yet, or the TV needs 
 
 ## When you are done
 
-If you don't install OpenShelf Keeper, you can switch ADB debugging off again; everything else keeps working. Under Developer options, "Revoke USB debugging authorisations" removes every computer you approved.
+If you don't install OpenShelf Keeper, you can switch ADB debugging off again; everything else keeps working. Under Developer options, "Revoke USB debugging authorizations" removes every computer you approved.

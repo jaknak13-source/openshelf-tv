@@ -1,31 +1,47 @@
 # OpenShelf TV
 
-A faster, ad-free home screen for Android TVs, a cleanup tool for the bloat that ships on them, and AirPlay so iPhones and Macs can mirror to the TV.
+An ad-free home screen, a bloatware cleanup tool and AirPlay mirroring for Android TV sets. Built and tested on a 2019 Sony BRAVIA.
 
-It does not replace the TV's operating system. It runs on top of Android TV: a new home screen app, a few switched-off system apps, and an open-source AirPlay receiver. Everything can be undone.
+OpenShelf runs on top of the TV's own Android TV system and leaves it in place. It installs a home screen app, switches off preinstalled apps you don't need and sets up an open-source AirPlay receiver. Every change can be undone.
 
 | Before: Sony's stock home screen | After: OpenShelf |
 |---|---|
-| ![Stock Sony Android TV home screen with Shop and Discover tabs and preinstalled promo apps](docs/images/stock-home.jpg) | ![OpenShelf home screen with a Favourites row and an Apps row on a dark background](docs/images/openshelf-home.jpg) |
+| ![Stock Sony Android TV home screen with Shop and Discover tabs and preinstalled promo apps](docs/images/stock-home.jpg) | ![OpenShelf home screen with a Favorites row and an Apps row on a dark background](docs/images/openshelf-home.jpg) |
 
 Both screenshots are from the test TV, which is set to German. One app tile and the profile icon are blurred.
 
-## What you get
+## Features
 
-- **OpenShelf home screen.** Rows of real app banners (Favourites, Apps, HDMI inputs, System), a calm dark background that picks up the colour of the focused app, a clock. No recommendations, no ads, no network access at all. On the test TV it uses about 23 MB of memory, against 176 MB for the stock home screen, and starts in under half a second.
-- **Cleanup lists.** Plain text lists of system packages to switch off: ad and tracking services (Samba TV on Sony), promo tiles, shop demo mode, hotel/business services, preloaded extras. Every line has a comment saying what it is. Packages are disabled with `pm disable-user`, never deleted.
-- **OpenShelf Keeper (optional).** A small app that checks after every boot that the listed apps are still off, and switches them off again if a firmware update turned them back on.
-- **AirPlay.** Uses the open-source receiver [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server). Screen mirroring from iPhone, iPad and Mac with the built-in Screen Mirroring button, no app on the phone. An optional patch makes the TV go back to whatever was on screen before (an app, live TV, the home screen) when you stop mirroring.
-- **One command-line tool** (`tools/openshelf.py`, Python, no dependencies) for backup, audit, apply, undo, health checks and settings. Works on macOS, Linux and Windows.
+### Home screen
 
-Measured on the test TV (Sony KD-55XG8096, 2 GB RAM), 60 seconds after a restart: free memory went from 537 MB to 778 MB.
+Four rows: Favorites, Apps, Inputs and System. The dark background takes on a tint of the focused app's color, and the date and time sit in the top right corner. There are no recommendation rows or ads, and the app has no internet permission. Hold OK on a tile to move it, hide it or add it to Favorites.
+
+On the test TV the home screen uses about 23 MB of memory, compared with 176 MB for the stock launcher, and starts in under half a second.
+
+### Cleanup lists
+
+Plain text lists of system packages to switch off, for example Samba TV's viewing tracker, promo tiles, shop demo mode and hotel display services. Each line has a comment that says what the package does. The tool disables packages with `pm disable-user` and never uninstalls them.
+
+### OpenShelf Keeper (optional)
+
+A small app that checks after every boot that the listed apps are still disabled. If a firmware update turned one back on, it switches it off again.
+
+### AirPlay
+
+Screen mirroring from iPhone, iPad and Mac through the built-in Screen Mirroring button, with nothing to install on the Apple device. The receiver is [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server). An optional patch sends the TV back to the app, live TV channel or home screen you had open when mirroring stops.
+
+### Command-line tool
+
+`tools/openshelf.py` covers backup, audit, apply, undo, health checks and settings. It needs only Python 3.9 or newer and adb, and runs on macOS, Linux and Windows.
+
+On the test TV (Sony KD-55XG8096, 2 GB RAM), free memory 60 seconds after a restart went from 537 MB to 778 MB.
 
 ## Which TVs
 
 | Device | Status |
 |---|---|
 | Sony BRAVIA 2019 Android TV 9 (XG80, XG85, XG95 and similar) | Tested. Ready-made cleanup lists in `lists/sony-bravia-2019/`. |
-| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes (Nvidia Shield, Chromecast with Google TV) | Home screen, keeper, AirPlay and the tool work. You need a cleanup list for your model: `openshelf.py audit` shows what is installed. See [lists/README.md](lists/README.md). |
+| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes (Nvidia Shield, Chromecast with Google TV) | Not tested yet. Nothing in the home screen, keeper, AirPlay setup or tool is specific to Sony, so they are expected to work. You need a cleanup list for your model: `openshelf.py audit` shows what is installed, and [lists/README.md](lists/README.md) explains how to write one. |
 | Google TV models (2021+) | Possible, but replacing the home screen is harder; Google TV can take Home back. Read [docs/troubleshooting.md](docs/troubleshooting.md) first. |
 | Amazon Fire TV with Fire OS | Android-based, untested. The tool and AirPlay should work; home screen replacement is restricted by Amazon. |
 | Samsung (Tizen), LG (webOS), Roku | Not possible. These are not Android TV. |
@@ -54,7 +70,7 @@ On Windows use `py` instead of `python3` and `set TV_HOST=...` instead of `expor
 
 ## Using a coding agent
 
-The whole setup can be done by a coding agent such as Claude Code. Open this folder in the agent and tell it:
+A coding agent such as Claude Code can do the whole setup for you. Open this folder in the agent and tell it:
 
 > Follow docs/agent-runbook.md to set up my TV.
 
@@ -68,13 +84,13 @@ Every package the tool disables is logged in `backups/undo.txt`.
 python3 tools/openshelf.py restore
 ```
 
-If the keeper is installed, uninstall it first, otherwise it switches the apps off again after the next restart. Without a computer, any app can be switched back on under Settings > Apps on the TV. Details: [docs/safety-and-undo.md](docs/safety-and-undo.md).
+If the keeper is installed, uninstall it first. Otherwise it switches the apps off again after the next restart. Without a computer, any app can be switched back on under Settings > Apps on the TV. Details: [docs/safety-and-undo.md](docs/safety-and-undo.md).
 
 ## Things to know
 
 - ADB debugging has to stay on if you use the keeper. Only computers you approved on the TV can connect.
 - After switching apps off, wait at least 30 seconds before restarting the TV. Android saves the change with a short delay; a restart straight away can lose it.
-- The menu layer of most Android TVs is drawn at 1920x1080 even on 4K panels. Video, including AirPlay, still plays in 4K.
+- Most Android TVs draw their menus at 1920x1080, even on 4K panels. Video apps still play in 4K, and AirPlay can be set to advertise 4K (see [docs/airplay.md](docs/airplay.md)).
 - Copy-protected apps (Apple TV+, Netflix on the phone) cannot be mirrored over AirPlay. That is an Apple limit.
 - Ad-blocking DNS (`openshelf.py tweak dns adguard`) blocks ad servers for the whole TV but can break ad-funded streaming apps. It is off unless you turn it on.
 

@@ -31,7 +31,7 @@ You need JDK 17, `openssl`, `zip` and the Android SDK with `platforms;android-28
 ```sh
 export JAVA_HOME=/path/to/jdk-17
 export ANDROID_SDK_ROOT=/path/to/android-sdk
-./build.sh     # -> build/openshelf-keeper.apk
+./build.sh     # writes build/openshelf-keeper.apk
 ./test.sh      # plan rules, key storage, run log, ADB client against a fake adbd
 adb install build/openshelf-keeper.apk
 ```

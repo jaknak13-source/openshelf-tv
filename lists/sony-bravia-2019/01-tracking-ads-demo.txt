@@ -1,8 +1,8 @@
-# Sony BRAVIA 2019 (Android TV 9) - list 1: tracking, ads, promos, shop demo, telemetry
+# Sony BRAVIA 2019 (Android TV 9), list 1: tracking, ads, promos, shop demo, telemetry
 # Tested on KD-55XG8096, firmware PTT1.190515.001.S54 (EU). Packages are disabled, not removed.
 # Packages not installed on your TV are skipped. Remove a line to keep that app.
 
-tv.samba.ssm                                   # Samba TV: recognises what is on screen for advertisers
+tv.samba.ssm                                   # Samba TV: recognizes what is on screen for advertisers
 com.sony.dtv.sonyselect                        # Sony Select app store / promo tiles
 com.sony.dtv.promos                            # "My BRAVIA" promotions
 com.sony.dtv.discovery                         # Discover bar on the stock home screen
