@@ -1,0 +1,6 @@
+# Apps that `openshelf check` starts one by one. Apps not installed are reported as SKIP.
+# One package per line; text after # is ignored.
+com.sony.dtv.tvx                   # live TV (Sony)
+com.netflix.ninja                  # Netflix
+com.google.android.youtube.tv      # YouTube
+com.android.vending                # Play Store

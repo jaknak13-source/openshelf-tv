@@ -1,0 +1,11 @@
+# Sony BRAVIA 2019 (Android TV 9) - list 3: preloaded extras most people never open
+# Review this one: delete a line if you use that app.
+
+com.sony.dtv.customersupport                   # "Help" tile
+com.sony.dtv.smarthelp                         # Smart Help
+com.sony.dtv.imanual                           # i-Manual
+com.google.android.music                       # Google Play Music (service shut down in 2020)
+com.google.android.play.games                  # Google Play Games
+com.google.android.inputmethod.japanese        # Japanese keyboard
+com.sony.dtv.youview                           # YouView (UK-only TV service)
+com.youview.tv.servicehost                     # YouView service host

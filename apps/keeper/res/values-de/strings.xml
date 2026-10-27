@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenShelf Keeper</string>
+    <string name="subtitle">Deaktiviert die ausgewählten System-Apps nach jedem Neustart erneut.</string>
+    <string name="label_connection">Verbindung</string>
+    <string name="label_last_run">Letzter Lauf</string>
+    <string name="label_result">Ergebnis</string>
+    <string name="label_log">Protokoll des letzten Laufs</string>
+    <string name="apply">Jetzt anwenden</string>
+    <string name="apply_running">Läuft …</string>
+    <string name="hint_auth">Bitte am TV \'USB-Debugging zulassen\' mit \'Immer zulassen\' bestätigen</string>
+    <string name="notification_text">Deaktivierungen werden angewendet …</string>
+    <string name="none">–</string>
+    <string name="conn_never">Noch kein Lauf</string>
+    <string name="conn_starting">Starte …</string>
+    <string name="conn_interrupted">Lauf abgebrochen (App wurde beendet). Bitte erneut anwenden.</string>
+    <string name="conn_connecting">Verbinde mit adbd …</string>
+    <string name="conn_waiting_auth">Warte auf Freigabe am TV …</string>
+    <string name="conn_connected">Verbunden, Liste wird angewendet …</string>
+    <string name="conn_ok">Verbunden, Schlüssel freigegeben</string>
+    <string name="conn_unreachable">adbd nicht erreichbar. Ist ADB-Debugging am TV eingeschaltet?</string>
+    <string name="conn_auth_missing">Freigabe am TV fehlt</string>
+    <string name="conn_failed">Fehler beim letzten Lauf</string>
+    <string name="log_empty">Noch keine Einträge.</string>
+    <string name="log_no_details">Keine Änderungen, keine Meldungen.</string>
+    <string name="log_unreadable">Protokoll nicht lesbar.</string>
+    <string name="footer">%1$d Pakete in der Liste · adbd %2$s</string>
+    <string name="result_done">%1$d jetzt deaktiviert · %2$d bereits aus · %3$d nicht installiert · %4$d Fehler</string>
+    <string name="result_done_skipped">%1$d jetzt deaktiviert · %2$d bereits aus · %3$d nicht installiert · %4$d Fehler · %5$d übersprungen</string>
+    <string name="result_unreachable">adbd nicht erreichbar (%1$s)</string>
+    <string name="last_run_date_pattern">dd.MM.yyyy, HH:mm:ss</string>
+</resources>

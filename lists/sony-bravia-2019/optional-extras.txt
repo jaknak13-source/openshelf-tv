@@ -1,0 +1,5 @@
+# Sony BRAVIA 2019 (Android TV 9) - optional: apps some people use
+# Not applied by default and not embedded in the keeper unless you add it to KEEPER_LISTS.
+
+com.google.android.videos                      # Google Play Movies & TV
+com.sony.dtv.smarthomesettings                 # "TV Control Setup with Amazon Alexa"

@@ -1,0 +1,13 @@
+# Sony BRAVIA 2019 (Android TV 9) - list 2: hotel and business-display services
+# Used for TVs in hotels and shops. Keep vendorprotocol if you use Control4-style home automation.
+
+com.sony.dtv.b2b.hotelmode                     # hotel mode
+com.sony.dtv.b2b.prosettings                   # professional settings menu
+com.sony.dtv.b2b.rs232csupport                 # RS-232 serial control
+com.sony.dtv.b2b.vendorprotocol                # home-automation broadcast of model/MAC/IP on the network
+com.sony.dtv.b2b.noderuntime.normal            # Node.js runtime for the business services
+com.sony.dtv.b2b.noderuntime.privilege         # Node.js runtime (privileged)
+com.sony.dtv.b2b.importexport                  # settings import/export for installers
+com.sony.dtv.b2b.frameworkextension            # business framework extension
+com.sony.dtv.b2b.webappruntimedrm              # web app DRM runtime for business apps
+com.sony.dtv.browser.webappruntimeextension    # web app runtime extension

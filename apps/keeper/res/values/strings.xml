@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenShelf Keeper</string>
+    <string name="subtitle">Disables the selected system apps again after every restart.</string>
+    <string name="label_connection">Connection</string>
+    <string name="label_last_run">Last run</string>
+    <string name="label_result">Result</string>
+    <string name="label_log">Log of the last run</string>
+    <string name="apply">Apply now</string>
+    <string name="apply_running">Running …</string>
+    <string name="hint_auth">On the TV, confirm “Allow USB debugging?” with “Always allow”</string>
+    <string name="notification_text">Disabling apps …</string>
+    <string name="none">–</string>
+    <string name="conn_never">No run yet</string>
+    <string name="conn_starting">Starting …</string>
+    <string name="conn_interrupted">Run cancelled (the app was stopped). Please apply again.</string>
+    <string name="conn_connecting">Connecting to adbd …</string>
+    <string name="conn_waiting_auth">Waiting for approval on the TV …</string>
+    <string name="conn_connected">Connected, applying the list …</string>
+    <string name="conn_ok">Connected, key approved</string>
+    <string name="conn_unreachable">adbd not reachable. Is ADB debugging switched on in the TV settings?</string>
+    <string name="conn_auth_missing">Not approved on the TV yet</string>
+    <string name="conn_failed">Last run failed</string>
+    <string name="log_empty">No entries yet.</string>
+    <string name="log_no_details">No changes, no messages.</string>
+    <string name="log_unreadable">Log can’t be read.</string>
+    <string name="footer">%1$d packages in the list · adbd %2$s</string>
+    <string name="result_done">%1$d disabled now · %2$d already off · %3$d not installed · %4$d errors</string>
+    <string name="result_done_skipped">%1$d disabled now · %2$d already off · %3$d not installed · %4$d errors · %5$d skipped</string>
+    <string name="result_unreachable">adbd not reachable (%1$s)</string>
+    <!-- Empty: use the locale's own date and time format. values-de sets the German pattern. -->
+    <string name="last_run_date_pattern"></string>
+</resources>

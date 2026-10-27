@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenShelf</string>
+
+    <string name="row_favorites">Favoriten</string>
+    <string name="row_apps">Apps</string>
+    <string name="row_inputs">Eingänge</string>
+    <string name="row_system">System</string>
+
+    <string name="empty_favorites">Noch keine Favoriten. Auf einer App OK lange drücken und „Zu Favoriten“ wählen.</string>
+    <string name="empty_apps">Alle Apps sind Favoriten oder ausgeblendet.</string>
+    <string name="empty_inputs">Keine HDMI-Eingänge gefunden.</string>
+
+    <string name="tile_settings">Einstellungen</string>
+    <string name="tile_edit">Startbildschirm bearbeiten</string>
+    <string name="input_disconnected">Nicht verbunden</string>
+
+    <string name="edit_add_favorite">Zu Favoriten</string>
+    <string name="edit_remove_favorite">Aus Favoriten entfernen</string>
+    <string name="edit_move_left">Nach links</string>
+    <string name="edit_move_right">Nach rechts</string>
+    <string name="edit_hide">Ausblenden</string>
+
+    <string name="status_added_favorite">„%1$s“ ist jetzt ein Favorit.</string>
+    <string name="status_removed_favorite">„%1$s“ ist nicht mehr bei den Favoriten.</string>
+    <string name="status_hidden">„%1$s“ ausgeblendet. Zurückholen unter System › Startbildschirm bearbeiten.</string>
+    <string name="status_system_fixed">Systemkacheln sind fest und lassen sich nicht bearbeiten.</string>
+    <string name="status_launch_failed">„%1$s“ ließ sich nicht öffnen: Die App ist nicht mehr installiert oder gesperrt. Die Liste wurde neu geladen.</string>
+    <string name="status_input_failed">„%1$s“ ließ sich nicht öffnen: Keine App auf dem Fernseher nimmt HDMI-Eingänge an. Eingang über die Input-Taste der Fernbedienung wählen.</string>
+
+    <string name="editor_title">Startbildschirm bearbeiten</string>
+    <string name="editor_intro">Hintergrund wählen und ausgeblendete Kacheln zurückholen. Favoriten und Reihenfolge änderst du direkt auf dem Startbildschirm: OK lange drücken oder Menütaste.</string>
+    <string name="editor_section_wallpaper">Hintergrund</string>
+    <string name="editor_section_hidden">Ausgeblendet</string>
+    <string name="editor_wallpaper_default">Graphit (mitgeliefert)</string>
+    <string name="editor_active">Aktiv</string>
+    <string name="editor_apply">Übernehmen</string>
+    <string name="editor_applying">Wird übernommen …</string>
+    <string name="editor_unhide">Einblenden</string>
+    <string name="editor_scanning">Bilder in Pictures/Wallpaper werden gesucht …</string>
+    <string name="editor_no_images">Keine Bilder in Pictures/Wallpaper gefunden. JPG oder PNG dorthin kopieren, zum Beispiel mit „adb push bild.jpg /sdcard/Pictures/Wallpaper/“.</string>
+    <string name="editor_grant">Zugriff auf Bilder erlauben</string>
+    <string name="editor_permission_needed">Für eigene Hintergründe braucht die App Lesezugriff auf den Speicher.</string>
+    <string name="editor_permission_denied">Zugriff abgelehnt. Freigeben unter Einstellungen › Apps › OpenShelf › Berechtigungen oder per „adb shell pm grant tv.openshelf.home android.permission.READ_EXTERNAL_STORAGE“.</string>
+    <string name="editor_no_hidden">Nichts ausgeblendet. Zum Ausblenden auf dem Startbildschirm OK lange drücken.</string>
+    <string name="editor_wallpaper_done">„%1$s“ ist jetzt der Hintergrund. Mit Zurück siehst du ihn auf dem Startbildschirm.</string>
+    <string name="editor_wallpaper_default_done">Der mitgelieferte Hintergrund ist wieder aktiv.</string>
+    <string name="editor_wallpaper_failed">„%1$s“ ließ sich nicht öffnen: keine lesbare Bilddatei oder zu wenig Speicher. Andere Datei wählen.</string>
+    <string name="editor_unhidden">„%1$s“ ist wieder auf dem Startbildschirm.</string>
+    <string name="editor_not_installed">%1$s (nicht installiert)</string>
+
+    <string name="clock_time_pattern">HH:mm</string>
+    <string name="clock_date_pattern">EEEE, d. MMMM</string>
+</resources>

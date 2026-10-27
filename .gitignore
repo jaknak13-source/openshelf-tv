@@ -1,0 +1,30 @@
+# build output and local signing keys (never commit these)
+build/
+signing/
+*.apk
+*.aab
+*.keystore
+*.jks
+*.p12
+.pass
+
+# data pulled from your TV (package lists, screenshots, memory dumps)
+backups/
+checks/
+
+# local tooling
+.sdk/
+decoded/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+adbkey
+adbkey.pub
+.idea/
+.vscode/
+Thumbs.db
