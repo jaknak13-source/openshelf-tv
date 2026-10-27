@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you refer to this project, please cite it as below."
+type: software
+title: "OpenShelf TV"
+abstract: "An ad-free home screen, a bloatware cleanup tool and AirPlay mirroring for Android TV sets, tested on a 2019 Sony BRAVIA. Changes are made over ADB without root and can be undone."
+authors:
+  - name: "OpenShelf TV contributors"
+repository-code: "https://github.com/jaknak13-source/openshelf-tv"
+url: "https://github.com/jaknak13-source/openshelf-tv"
+license: PolyForm-Noncommercial-1.0.0
+keywords:
+  - android-tv
+  - launcher
+  - debloat
+  - airplay
+  - adb
+  - sony-bravia

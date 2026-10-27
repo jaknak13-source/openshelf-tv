@@ -94,6 +94,32 @@ If the keeper is installed, uninstall it first. Otherwise it switches the apps o
 - Copy-protected apps (Apple TV+, Netflix on the phone) cannot be mirrored over AirPlay. That is an Apple limit.
 - Ad-blocking DNS (`openshelf.py tweak dns adguard`) blocks ad servers for the whole TV but can break ad-funded streaming apps. It is off unless you turn it on.
 
+## Questions
+
+### Does this need root?
+
+No. Everything goes through ADB, which every Android TV offers in its developer options. Apps are switched off with `pm disable-user`, the same thing the Disable button under Settings > Apps does.
+
+### Can it break the TV?
+
+Nothing is uninstalled, so a factory reset always brings the TV back to stock. The tool refuses to disable packages the TV needs to work, such as live TV, inputs, Settings, the Play Store, Chromecast and system updates, even if a list contains them. The stock home screen is only switched off when a replacement is installed.
+
+### What happens after a firmware update?
+
+System updates stay on. An update can turn some of the disabled apps back on. Run `apply` again, or install OpenShelf Keeper, which does it after every boot.
+
+### Does it remove ads inside YouTube or Netflix?
+
+No. The home screen has no ads, but ads inside apps are not touched. For YouTube, [SmartTube](https://github.com/yuliskov/SmartTube) is a common choice. The optional ad-blocking DNS setting blocks known ad servers for the whole TV.
+
+### Can I mirror an iPhone to an Android TV?
+
+Yes. After the AirPlay setup the TV shows up under Screen Mirroring on the iPhone, iPad or Mac, like an Apple TV would. See [docs/airplay.md](docs/airplay.md).
+
+### Can I use another launcher, such as Projectivy?
+
+Yes. The tool accepts Projectivy Launcher as the replacement home screen and never disables it. The cleanup lists, the keeper and the AirPlay setup work the same with either launcher.
+
 ## Folder layout
 
 ```

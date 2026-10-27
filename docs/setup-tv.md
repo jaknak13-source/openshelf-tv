@@ -1,4 +1,4 @@
-# Preparing the TV
+# Preparing the TV: turn on network debugging
 
 Everything in this project talks to the TV over ADB (Android Debug Bridge) on your home network. ADB is off by default and hidden behind the developer menu.
 

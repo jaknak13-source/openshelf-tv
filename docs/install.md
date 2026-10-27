@@ -1,4 +1,4 @@
-# Installing
+# Installing OpenShelf on the TV
 
 Order matters: back up, clean up, then install the home screen before switching off the stock one.
 
