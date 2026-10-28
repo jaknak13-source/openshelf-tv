@@ -8,8 +8,8 @@ ADB debugging has to stay switched on in the TV's developer options. The keeper 
 
 ## What it will not touch
 
-- A fixed list of protected packages in `src/tv/openshelf/keeper/core/Plan.java`: every package starting with `com.sony.dtv.tvinput`, the keeper itself, and `com.sony.dtv.tvx`, `com.android.tv.settings`, `com.android.vending`, `com.google.android.gms`, `com.android.systemui`, `com.google.android.katniss`, `com.google.android.apps.mediashell`, `com.sony.dtv.braviasyncservice`, `com.sony.dtv.audiooutput`, `com.sony.dtv.hbbtvlauncher`, `com.sony.dtv.systemupdate`, `com.spocky.projengmenu`, `tv.openshelf.home`, `io.github.jqssun.airplay`.
-- The stock home screen (`com.google.android.tvlauncher`), unless OpenShelf (`tv.openshelf.home`) or Projectivy (`com.spocky.projengmenu`) is installed and enabled. Without a replacement, Home would end up on a Sony settings screen.
+- A fixed list of protected packages in `src/tv/openshelf/keeper/core/Plan.java`: every package starting with `com.sony.dtv.tvinput` or `com.android.providers.`, the keeper itself, and `com.sony.dtv.tvx`, `com.android.tv.settings`, `com.android.vending`, `com.google.android.gms`, `com.android.systemui`, `com.google.android.katniss`, `com.google.android.apps.mediashell`, `com.sony.dtv.braviasyncservice`, `com.sony.dtv.audiooutput`, `com.sony.dtv.hbbtvlauncher`, `com.sony.dtv.systemupdate`, `com.spocky.projengmenu`, `tv.openshelf.home`, `io.github.jqssun.airplay`, `android`, `com.android.shell`, `com.google.android.leanback.ime`, `com.google.android.tvsetup`. It is the same list the command-line tool uses, and a test checks that the two stay equal.
+- The stock home screen (`com.google.android.tvlauncher`, `com.google.android.leanbacklauncher` or `com.google.android.apps.tv.launcherx`), unless OpenShelf (`tv.openshelf.home`) or Projectivy (`com.spocky.projengmenu`) is installed and enabled. Without a replacement, Home would end up on a Sony settings screen.
 - Package names outside `[a-zA-Z0-9_.]`. These are rejected at build time and checked again on the TV.
 
 ## Package lists

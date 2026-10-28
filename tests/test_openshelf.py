@@ -164,6 +164,33 @@ class LauncherRuleTest(unittest.TestCase):
         result = self.plan({self.TL, "com.spocky.projengmenu"}, packages=(self.TL, "com.spocky.projengmenu"))
         self.assertEqual(result, {self.TL: "DISABLE", "com.spocky.projengmenu": "REFUSE"})
 
+    def test_older_android_tv_and_google_tv_launchers_are_guarded(self):
+        for launcher in ("com.google.android.leanbacklauncher", "com.google.android.apps.tv.launcherx"):
+            self.assertEqual(self.plan({launcher}, packages=(launcher,))[launcher], "REFUSE", launcher)
+            self.assertEqual(self.plan({launcher, "tv.openshelf.home"}, packages=(launcher,))[launcher],
+                             "DISABLE", launcher)
+
+
+class CoreProtectedTest(unittest.TestCase):
+    def test_android_core_packages_are_protected(self):
+        for pkg in ("android", "com.android.shell", "com.google.android.leanback.ime",
+                    "com.google.android.tvsetup", "com.android.providers.settings"):
+            self.assertTrue(osh.is_protected(pkg), pkg)
+        self.assertFalse(osh.is_protected("android.autoinstalls.config.sony.bravia"))
+
+    def test_keeper_uses_the_same_protected_packages_and_launchers(self):
+        import re
+        java = (Path(__file__).resolve().parent.parent / "apps/keeper/src/tv/openshelf/keeper/core/Plan.java").read_text()
+
+        def strings(block_name: str) -> set[str]:
+            block = re.search(block_name + r"\b[^;]*;", java, re.S).group(0)
+            return set(re.findall(r'"([^"]+)"', block))
+
+        self.assertEqual(strings("DENIED") | {"tv.openshelf.keeper"}, set(osh.PROTECTED))
+        self.assertEqual(strings("DENIED_PREFIXES"), set(osh.PROTECTED_PREFIXES))
+        self.assertEqual(strings("STOCK_LAUNCHERS"), set(osh.STOCK_LAUNCHERS))
+        self.assertEqual(strings("REPLACEMENT_LAUNCHERS"), set(osh.HOME_REPLACEMENTS))
+
 
 class ApplyTest(unittest.TestCase):
     def setUp(self):

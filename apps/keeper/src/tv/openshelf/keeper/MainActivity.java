@@ -104,7 +104,11 @@ public final class MainActivity extends Activity {
         long time = status.lastTime();
         lastTime.setText(time == 0 ? getString(R.string.none) : dateFormat().format(new Date(time)));
         result.setText(outcome == null ? getString(R.string.none) : resultText(outcome));
-        result.setTextColor(getColor(outcome == null ? R.color.text_secondary : outcomeColor(outcome)));
+        int resultColor = outcome == null ? R.color.text_secondary : outcomeColor(outcome);
+        if ("DONE".equals(outcome) && status.lastCount(Status.ERRORS) > 0) {
+            resultColor = R.color.warn; // connected fine, but some packages could not be disabled
+        }
+        result.setTextColor(getColor(resultColor));
 
         boolean authProblem = running ? "WAITING_FOR_AUTH".equals(state) : "AUTH_PENDING".equals(outcome);
         hint.setVisibility(authProblem ? TextView.VISIBLE : TextView.GONE);

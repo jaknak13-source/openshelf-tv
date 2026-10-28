@@ -15,12 +15,19 @@ public final class Plan {
     public static final String LIST_ENABLED = "pm list packages -e";
 
     static final Pattern PACKAGE_NAME = Pattern.compile("^[a-zA-Z0-9_.]+$");
-    static final String STOCK_LAUNCHER = "com.google.android.tvlauncher";
+    // Stock home apps: Android TV 9+, Android TV 5-8, Google TV. Same set as STOCK_LAUNCHERS in tools/openshelf.py.
+    static final Set<String> STOCK_LAUNCHERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+            "com.google.android.tvlauncher",
+            "com.google.android.leanbacklauncher",
+            "com.google.android.apps.tv.launcherx")));
     static final List<String> REPLACEMENT_LAUNCHERS = Collections.unmodifiableList(Arrays.asList(
             "com.spocky.projengmenu",
             "tv.openshelf.home"));
 
-    private static final String DENIED_PREFIX = "com.sony.dtv.tvinput";
+    // Same packages as PROTECTED and PROTECTED_PREFIXES in tools/openshelf.py (the keeper adds itself).
+    private static final List<String> DENIED_PREFIXES = Collections.unmodifiableList(Arrays.asList(
+            "com.sony.dtv.tvinput",
+            "com.android.providers."));
     private static final Set<String> DENIED = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
             "com.sony.dtv.tvx",
             "com.android.tv.settings",
@@ -35,7 +42,11 @@ public final class Plan {
             "com.sony.dtv.systemupdate",
             "com.spocky.projengmenu",
             "tv.openshelf.home",
-            "io.github.jqssun.airplay")));
+            "io.github.jqssun.airplay",
+            "android",
+            "com.android.shell",
+            "com.google.android.leanback.ime",
+            "com.google.android.tvsetup")));
 
     public enum Decision { DISABLE, ALREADY_OFF, NOT_INSTALLED, DENIED, INVALID_NAME, KEPT_FOR_HOME }
 
@@ -57,7 +68,15 @@ public final class Plan {
     }
 
     public static boolean isDenied(String pkg, String selfPackage) {
-        return DENIED.contains(pkg) || pkg.startsWith(DENIED_PREFIX) || pkg.equals(selfPackage);
+        if (DENIED.contains(pkg) || pkg.equals(selfPackage)) {
+            return true;
+        }
+        for (String prefix : DENIED_PREFIXES) {
+            if (pkg.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static List<Step> build(List<String> wanted, Set<String> installed, Set<String> disabled,
@@ -79,7 +98,7 @@ public final class Plan {
                 d = Decision.NOT_INSTALLED;
             } else if (disabled.contains(pkg)) {
                 d = Decision.ALREADY_OFF;
-            } else if (pkg.equals(STOCK_LAUNCHER) && !replacementHome) {
+            } else if (STOCK_LAUNCHERS.contains(pkg) && !replacementHome) {
                 d = Decision.KEPT_FOR_HOME;
             } else {
                 d = Decision.DISABLE;

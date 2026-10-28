@@ -11,10 +11,10 @@ You probably restarted within a few seconds of `apply`. Run `apply` again and wa
 
 ## Pressing Home still opens the old home screen
 `04-stock-home.txt` hasn't been applied, or another launcher is installed and Android is asking which to use. Check with:
-`adb -s $TV_HOST:5555 shell cmd package resolve-activity --brief -c android.intent.category.HOME -a android.intent.action.MAIN`
+`adb -s <TV-IP>:5555 shell cmd package resolve-activity --brief -c android.intent.category.HOME -a android.intent.action.MAIN`
 
 ## Google TV models take Home back
-Google TV's launcher (`com.google.android.apps.tv.launcherx`) and its setup wizard are more tightly bound than the older Android TV launcher. Disabling them can leave a black screen on some models. Test with a launcher you can reach from the app list, keep a backup, and don't disable the setup wizard.
+Google TV's launcher (`com.google.android.apps.tv.launcherx`) and its setup wizard are more tightly bound than the older Android TV launcher. The tool only disables the launcher when OpenShelf or Projectivy is enabled, but even then a black screen is possible on some models. Test with a launcher you can reach from the app list, keep a backup, and don't disable the setup wizard.
 
 ## Play Store says the AirPlay app isn't compatible
 The Play build is 64-bit only. Use the GitHub or F-Droid APK; see [airplay.md](airplay.md).

@@ -42,6 +42,13 @@ svc = svc_path.read_text()
 if "os_autoLaunched" in svc:
     sys.exit("already patched")
 
+# The helper below reads the service's connection counter through obfuscated names from v0.0.36.
+# smali does not resolve them at build time, so check they exist instead of crashing at runtime.
+if ".field private final _connectionCount:Lbq1;" not in svc:
+    sys.exit("anchor for _connectionCount:Lbq1; not found; this patch is for receiver v0.0.36")
+if not any(root.parent.glob("smali*/eq2.smali")):
+    sys.exit("class eq2 not found; this patch is for receiver v0.0.36")
+
 # 1. new field
 svc = replace_once(svc, "\n# direct methods", f"\n.field private os_autoLaunched:Z\n\n# direct methods", "field section")
 

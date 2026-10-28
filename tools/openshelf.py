@@ -45,10 +45,21 @@ PROTECTED = frozenset({
     "tv.openshelf.keeper",
     "io.github.jqssun.airplay",
     "com.spocky.projengmenu",  # replacement launcher; disabling it could leave no home app
+    # Android core: the framework, the shell user that adb (and the undo path) runs as,
+    # the TV keyboard and the setup wizard.
+    "android",
+    "com.android.shell",
+    "com.google.android.leanback.ime",
+    "com.google.android.tvsetup",
 })
-PROTECTED_PREFIXES = ("com.sony.dtv.tvinput",)
+PROTECTED_PREFIXES = ("com.sony.dtv.tvinput", "com.android.providers.")
 
-STOCK_LAUNCHER = "com.google.android.tvlauncher"
+# Stock home apps: Android TV 9+, Android TV 5-8, Google TV. Only disabled when a replacement is enabled.
+STOCK_LAUNCHERS = frozenset({
+    "com.google.android.tvlauncher",
+    "com.google.android.leanbacklauncher",
+    "com.google.android.apps.tv.launcherx",
+})
 HOME_REPLACEMENTS = ("tv.openshelf.home", "com.spocky.projengmenu")
 
 AIRPLAY_PKG = "io.github.jqssun.airplay"
@@ -125,9 +136,9 @@ def plan_disable(packages: Sequence[str], installed: Iterable[str], disabled: It
         else:
             plan.append(PlanItem(package, "DISABLE"))
     to_disable = {item.package for item in plan if item.action == "DISABLE"}
-    if STOCK_LAUNCHER in to_disable and replacement_home(enabled, to_disable) is None:
+    if to_disable & STOCK_LAUNCHERS and replacement_home(enabled, to_disable) is None:
         reason = "no replacement home app enabled (" + " or ".join(HOME_REPLACEMENTS) + ")"
-        plan = [PlanItem(i.package, "REFUSE", reason) if i.package == STOCK_LAUNCHER else i for i in plan]
+        plan = [PlanItem(i.package, "REFUSE", reason) if i.package in STOCK_LAUNCHERS else i for i in plan]
     return plan
 
 
