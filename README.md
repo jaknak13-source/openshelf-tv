@@ -1,6 +1,6 @@
 # OpenShelf TV
 
-An ad-free home screen, a bloatware cleanup tool and AirPlay mirroring for Android TV sets. Built and tested on a 2019 Sony BRAVIA.
+An ad-free home screen (launcher), bloatware cleanup without root, and AirPlay screen mirroring for Android TV. Built and tested on a 2019 Sony BRAVIA (KD-55XG8096).
 
 OpenShelf works over ADB on top of the TV's own Android TV system and does not replace it. Every change can be undone.
 
@@ -10,15 +10,17 @@ OpenShelf works over ADB on top of the TV's own Android TV system and does not r
 
 Both screenshots are from the test TV, which is set to German. One app tile and the profile icon are blurred.
 
+**[Download v1.0.0](https://github.com/jaknak13-source/openshelf-tv/releases/latest)** · [Quick start](#quick-start) · [Undo](#undo)
+
 ## Features
 
-### Home screen
+### Home screen (launcher)
 
 Four rows: Favorites, Apps, Inputs and System. The dark background takes on a tint of the focused app's color, and the date and time sit in the top right corner. There are no recommendation rows or ads, and the app has no internet permission. Hold OK on a tile to move it, hide it or add it to Favorites.
 
 On the test TV the home screen uses about 23 MB of memory, compared with 176 MB for the stock launcher, and starts in under half a second.
 
-### Cleanup lists
+### Cleanup (debloat) lists
 
 Plain text lists of system packages to switch off, for example Samba TV's viewing tracker, promo tiles, shop demo mode and hotel display services. Each line has a comment that says what the package does. The tool disables packages with `pm disable-user` and never uninstalls them.
 
@@ -28,7 +30,7 @@ On the test TV (Sony KD-55XG8096, 2 GB RAM), free memory 60 seconds after a rest
 
 A small app that checks after every boot that the listed apps are still disabled. If a firmware update turned one back on, it switches it off again.
 
-### AirPlay
+### AirPlay receiver
 
 Screen mirroring from iPhone, iPad and Mac through the built-in Screen Mirroring button, with nothing to install on the Apple device. The receiver is [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server). An optional patch sends the TV back to the app, live TV channel or home screen you had open when mirroring stops.
 
@@ -40,33 +42,57 @@ Screen mirroring from iPhone, iPad and Mac through the built-in Screen Mirroring
 
 | Device | Status |
 |---|---|
-| Sony BRAVIA 2019 Android TV 9 (XG80, XG85, XG95 and similar) | Tested. Ready-made cleanup lists in `lists/sony-bravia-2019/`. |
-| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes (Nvidia Shield, Chromecast with Google TV) | Not tested yet. The home screen, keeper, AirPlay setup and tool should run on any Android TV, but the tool's protected packages are mostly Sony and Google names, so check your TV's live TV and input packages yourself before applying a list. You need a cleanup list for your model: `openshelf.py backup` saves the installed system packages (`packages_system.txt`), and [lists/README.md](lists/README.md) explains how to write a list from it. |
-| Google TV models (2021+) | Possible, but replacing the home screen is harder; Google TV can take Home back. Read [docs/troubleshooting.md](docs/troubleshooting.md) first. |
-| Amazon Fire TV with Fire OS | Android-based, untested. The tool and AirPlay should work; home screen replacement is restricted by Amazon. |
+| Sony BRAVIA 2019, Android TV 9 | Tested on the KD-55XG8096. Other 2019 models (XG85, XG95) are likely to work but untested. Ready-made lists in `lists/sony-bravia-2019/`. |
+| Other Android TV sets (Philips, TCL, Hisense, Sharp, other Sony years) and boxes such as the Nvidia Shield | Not tested. You need to write a cleanup list first (see below). |
+| Google TV models (2021+), including Chromecast with Google TV | Possible, but replacing the home screen is harder; Google TV can take Home back. Read [docs/troubleshooting.md](docs/troubleshooting.md) first. |
+| Amazon Fire TV with Fire OS | Untested. Amazon restricts home screen replacement. |
 | Samsung (Tizen), LG (webOS), Roku | Not possible. These are not Android TV. |
+
+The home screen, keeper, AirPlay setup and tool should run on any Android TV 9 or newer, but the tool's protected packages are mostly Sony and Google names. On other brands, check the live TV and input packages yourself before applying a list. `openshelf.py backup` saves the installed system packages (`packages_system.txt`), and [lists/README.md](lists/README.md) explains how to write a list from it.
 
 ## Quick start
 
 You need a computer on the same network as the TV, [Android platform-tools](https://developer.android.com/tools/releases/platform-tools) (which includes `adb`, the Android Debug Bridge) and Python 3.9 or newer.
 
-1. Turn on network debugging on the TV: [docs/setup-tv.md](docs/setup-tv.md).
-2. Connect and take a backup:
+1. Download this repository (green **Code** button > **Download ZIP**, then unzip) or `git clone https://github.com/jaknak13-source/openshelf-tv`, and open a terminal in that folder. How to install adb and Python: [docs/install.md](docs/install.md#tools-on-your-computer).
+2. Turn on network debugging on the TV: [docs/setup-tv.md](docs/setup-tv.md).
+3. Connect and take a backup:
    ```bash
    export TV_HOST=<your TV's IP address>
    python3 tools/openshelf.py connect
    python3 tools/openshelf.py backup
    ```
-3. See what would change, then apply:
+4. See what would change, then apply:
    ```bash
    python3 tools/openshelf.py audit
    python3 tools/openshelf.py apply lists/sony-bravia-2019/01-tracking-ads-demo.txt --dry-run
    python3 tools/openshelf.py apply lists/sony-bravia-2019/01-tracking-ads-demo.txt
    ```
-4. Install the home screen, using the prebuilt APK in [dist/](dist/) or your own build, then switch off the stock one: [docs/install.md](docs/install.md).
-5. Check that everything still works: `python3 tools/openshelf.py check`.
+   Repeat for `02-hotel-business.txt` and `03-unused-extras.txt`. Read `03` first and remove lines for apps you use.
+5. Install the home screen, open it once from the app list, then switch off the stock one:
+   ```bash
+   python3 tools/openshelf.py install dist/openshelf-home-1.0.0.apk
+   python3 tools/openshelf.py apply lists/sony-bravia-2019/04-stock-home.txt
+   ```
+6. Wait 30 seconds, then let the tool restart the TV and check that everything still works: `python3 tools/openshelf.py check --reboot`.
+
+The full walkthrough, including building the apps yourself, is in [docs/install.md](docs/install.md).
 
 On Windows use `py` instead of `python3`, and `set TV_HOST=...` (Command Prompt) or `$env:TV_HOST="..."` (PowerShell) instead of `export`.
+
+## Undo
+
+Every package the tool disables is logged in `backups/undo.txt`. To go back to stock completely, run these in this order (replace `<TV-IP>` with the TV's address):
+
+```bash
+adb -s <TV-IP>:5555 uninstall tv.openshelf.keeper    # if you installed the keeper
+python3 tools/openshelf.py restore                    # switches everything in backups/undo.txt back on
+python3 tools/openshelf.py tweak dns off              # if you turned on ad-blocking DNS
+python3 tools/openshelf.py tweak animations 1         # if you changed animation speed
+adb -s <TV-IP>:5555 uninstall tv.openshelf.home
+```
+
+The keeper goes first, because it would switch the apps off again at the next restart. `restore` turns the stock home screen back on, so OpenShelf can be removed after it. Without a computer, any app can be switched back on under Settings > Apps on the TV. Details: [docs/safety-and-undo.md](docs/safety-and-undo.md).
 
 ## Using a coding agent
 
@@ -75,16 +101,6 @@ A coding agent such as Claude Code can do the whole setup for you. Open this fol
 > Follow docs/agent-runbook.md to set up my TV.
 
 The runbook has the order of steps, the checks after each one, and the points where the agent has to stop and ask you (for example before changing anything on the TV, and for the prompts you must accept with the remote).
-
-## Undo
-
-Every package the tool disables is logged in `backups/undo.txt`.
-
-```bash
-python3 tools/openshelf.py restore
-```
-
-If the keeper is installed, uninstall it first. Otherwise it switches the apps off again after the next restart. Without a computer, any app can be switched back on under Settings > Apps on the TV. Details: [docs/safety-and-undo.md](docs/safety-and-undo.md).
 
 ## Things to know
 
@@ -141,14 +157,14 @@ Lists for other TV models are the most welcome addition. See [.github/CONTRIBUTI
 
 ## License and credits
 
-PolyForm Noncommercial 1.0.0. You may use, change and share this for free for any noncommercial purpose. Selling it, or putting it or a modified version behind a paywall, is not allowed. See [LICENSE](LICENSE).
+PolyForm Noncommercial 1.0.0. You may use, change and share it for free for personal use, and charities, schools and public bodies may use it too. Commercial use is not allowed without separate permission: for example selling it, bundling it with a paid product or service, installing it for paying customers or running it on a business's TVs. For a commercial license, open an issue. See [LICENSE](LICENSE).
 
 Third-party projects this builds on (not included here, each under its own license):
 
 - [jqssun/android-airplay-server](https://github.com/jqssun/android-airplay-server), GPL-3.0. The patch script modifies your own downloaded copy; if you share the patched APK, the GPL applies to it.
 - [Apktool](https://github.com/iBotPeaches/Apktool), Apache-2.0, used by the patch script.
 - [SmartTube](https://github.com/yuliskov/SmartTube), MIT, recommended for YouTube without ads.
-- [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv), whose model lists were a reference for the Sony lists.
+- [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv), MIT, whose model lists were a reference for the Sony lists.
 - AdGuard DNS (dns.adguard-dns.com), a free public DNS service.
 
 Sony, BRAVIA, AirPlay and other names are trademarks of their owners. This project is not affiliated with any of them.

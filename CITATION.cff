@@ -8,6 +8,8 @@ authors:
 repository-code: "https://github.com/jaknak13-source/openshelf-tv"
 url: "https://github.com/jaknak13-source/openshelf-tv"
 license: PolyForm-Noncommercial-1.0.0
+version: "1.0.0"
+date-released: "2026-10-28"
 keywords:
   - android-tv
   - launcher

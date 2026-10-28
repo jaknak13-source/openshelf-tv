@@ -1,6 +1,7 @@
 ---
 name: Bug report
 about: Something broke or behaves differently than the docs say
+labels: bug
 ---
 
 **TV model and firmware**

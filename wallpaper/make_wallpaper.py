@@ -3,6 +3,7 @@
 Dark graphite base with two soft light pools, a gentle vignette, and
 triangular dither noise so 8-bit gradients do not band on the panel.
 Usage: python3 make_wallpaper.py <out.png>
+Needs numpy and Pillow (pip install numpy pillow).
 """
 import sys
 

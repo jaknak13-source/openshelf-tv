@@ -4,7 +4,7 @@ This file is written for a coding agent (Claude Code, Codex, Cursor and similar)
 
 ## Rules
 
-1. **Ask before changing the TV.** Read-only commands (`connect`, `backup`, `audit`, `apply --dry-run`, `check` without `--reboot`, `airplay list`) are fine. Before every `apply`, `restore`, `install`, `adb uninstall`, `tweak`, `airplay set` or restart, show the user what will change and wait for a yes.
+1. **Ask before changing the TV.** Read-only commands (`connect`, `backup`, `audit`, `apply --dry-run`, `check` without `--reboot`, which opens a few apps on the TV, `airplay list`) are fine. Before every `apply`, `restore`, `install`, `adb uninstall`, `tweak`, `airplay set` or restart, show the user what will change and wait for a yes.
 2. **Backup first.** Run `backup` before the first change and keep the folder.
 3. **One list at a time**, dry-run first, `check` after each.
 4. **Wait 30 seconds after `apply` before any restart.** An immediate restart can lose the change.

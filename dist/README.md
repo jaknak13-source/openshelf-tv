@@ -28,7 +28,7 @@ shasum -a 256 -c SHA256SUMS.txt          # macOS and Linux
 apksigner verify --print-certs openshelf-home-1.0.0.apk
 ```
 
-On Windows, `certutil -hashfile <file> SHA256` prints the checksum.
+On Windows, `certutil -hashfile <file> SHA256` prints the checksum. `apksigner` is not part of platform-tools; it is in the Android SDK build-tools (for example `build-tools/34.0.0/apksigner`).
 
 | APK | Certificate | SHA-256 of the certificate |
 |---|---|---|

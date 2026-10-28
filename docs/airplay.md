@@ -19,6 +19,8 @@ Open the app once on the TV. "Start server at boot" and "Run in background" are 
 
 Without the patch, the AirPlay screen stays open after you stop mirroring. The patch makes the TV go back to whatever was in front before: an app, live TV or the home screen. If you open the AirPlay app by hand, nothing changes.
 
+The patch is written for receiver v0.0.36; download that release. It stops with an error on other versions.
+
 ```bash
 export APKTOOL_JAR=/path/to/apktool.jar    # https://github.com/iBotPeaches/Apktool/releases
 apps/airplay-patch/build.sh app-release.apk
@@ -28,7 +30,7 @@ The patched APK is signed with your own key, so Android won't install it over th
 
 ```bash
 python3 tools/openshelf.py airplay list
-adb -s $TV_HOST:5555 uninstall io.github.jqssun.airplay
+adb -s <TV-IP>:5555 uninstall io.github.jqssun.airplay
 python3 tools/openshelf.py install apps/airplay-patch/build/airplay-patched.apk
 python3 tools/openshelf.py airplay set server_name "Living room TV"
 ```

@@ -30,3 +30,5 @@ adbkey.pub
 .idea/
 .vscode/
 Thumbs.db
+CLAUDE.md
+*.log

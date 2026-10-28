@@ -99,7 +99,7 @@ Open OpenShelf Keeper on the TV and press **Apply now**. The TV asks "Allow USB 
 ## 8. Faster menus and ad-blocking DNS (optional)
 
 ```bash
-python3 tools/openshelf.py tweak animations 0.5
+python3 tools/openshelf.py tweak animations 0.5    # 'tweak animations 1' to undo
 python3 tools/openshelf.py tweak dns adguard      # 'tweak dns off' to undo
 ```
 
